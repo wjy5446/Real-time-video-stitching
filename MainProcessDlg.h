@@ -251,6 +251,7 @@ public:
 	void GethomographySIFT(Mat& dstImg, int nH_dst, int nW_dst, Mat& srcImg, int nH_src, int nW_src, Mat& homo);
 	void GethomographyGoodFeature(vector<Point2f>& arrPtPre, Mat& homo, Mat& homo_pre, int thresh_distance, int minFeature, double ransac, bool bFirst, bool bDebug = false, bool bEnlarge = false, int nEnlargeRate = 1, LR bLR = LEFT);
 	void GethomographyNew(vector<Point2f>& arrPtPre, Mat& homo, Mat& homo_pre, int thresh_distance, int minFeature, double ransac, bool bFirst, bool bDebug = false, bool bEnlarge = false, int nEnlargeRate = 1, LR bLR = LEFT);
+	void GethomographyHarris(vector<Point2f>& arrPtPre, Mat& homo, Mat& homo_pre, int thresh_distance, int minFeature, double ransac, bool bFirst, bool bDebug = false, bool bEnlarge = false, int nEnlargeRate = 1, LR bLR = LEFT);
 	void CorrectHomography(vector<Point2f>& arrPtR, bool bDebug);
 	void MakeMaskForBlend();
 	void WarpHomographyForVideo(Mat& BL, Mat& BR, int nHL, int nWL, int nHR, int nWR, bool bMultiBandBlend, bool bDebug);

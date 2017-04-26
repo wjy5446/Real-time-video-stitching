@@ -664,7 +664,30 @@ void CMainProcessDlg::OnTimer(UINT nIDEvent)
 						}
 
 						m_CPL_cur = m_homoL * m_CPL_pre;
+						m_CPR_cur = m_homoR * m_CPR_pre;
 
+						m_homoL_pre = m_homoL;
+						m_homoR_pre = m_homoR;
+					}
+				}
+
+				if (m_Radio_Method3.GetCheck() == BST_CHECKED)
+				{
+					if (m_nCurrentProcessingNum > 0)
+					{
+						if (m_nCurrentProcessingNum == 1)
+						{
+							GethomographyHarris(m_arrPtPreL, m_homoL, m_homoL_pre, 50, 10, 1, true, m_bDebug, m_bEnlarge, m_Edit_EnlargeRate, LEFT);// 프래임 사이 호모그래피 구하기
+							GethomographyHarris(m_arrPtPreR, m_homoR, m_homoR_pre, 50, 10, 1, true, m_bDebug, m_bEnlarge, m_Edit_EnlargeRate, RIGHT);// 프래임 사이 호모그래피 구하기
+						}
+
+						if (m_nCurrentProcessingNum > 1)
+						{
+							GethomographyHarris(m_arrPtPreL, m_homoL, m_homoL_pre, 50, 10, 1, false, m_bDebug, m_bEnlarge, m_Edit_EnlargeRate, LEFT);// 프래임 사이 호모그래피 구하기
+							GethomographyHarris(m_arrPtPreR, m_homoR, m_homoR_pre, 50, 10, 1, false, m_bDebug, m_bEnlarge, m_Edit_EnlargeRate, RIGHT);// 프래임 사이 호모그래피 구하기
+						}
+
+						m_CPL_cur = m_homoL * m_CPL_pre;
 						m_CPR_cur = m_homoR * m_CPR_pre;
 
 						m_homoL_pre = m_homoL;
@@ -2616,9 +2639,6 @@ void CMainProcessDlg::GethomographyHarris(vector<Point2f>& arrPtPre, Mat& homo, 
 		// value for filtering point
 		vector<Point2f>  arrGodPt, arrGodPtTrack;
 
-		int nH_Warp = 600;
-		int nW_Warp = 1200;
-
 		// value for debug
 		int nDebugOffset;
 
@@ -2641,20 +2661,51 @@ void CMainProcessDlg::GethomographyHarris(vector<Point2f>& arrPtPre, Mat& homo, 
 		}
 
 		// =====================================
-		// Get Feature Point
+		// Harris corner detection
 		// =====================================
 
-		int gridSize = 30;
-		int threshold = 5;
-		double distance;
+		int64 start_harris, end_harris;
 
+		Mat M_ImgPreHarris, M_ImgPreHarrisNorm, M_ImgPreHarrisNormScaled;
+		int blockSize = 7;
+		int kSize = 5;
+		double k = 0.05;
+
+		// Detect corner
+		cornerHarris(M_ImgPreGray, M_ImgPreHarris, blockSize, kSize, k);
+
+		// Normalizeing 
+		normalize(M_ImgPreHarris, M_ImgPreHarrisNorm, 0, 255, NORM_MINMAX, CV_32FC1, Mat());
+		convertScaleAbs(M_ImgPreHarrisNorm, M_ImgPreHarrisNormScaled);
+
+		// Save Point
+		int gridSize = 20;
+		int threshold = 50;
+		bool bFlag = false;
+
+		// grid
 		for (y = 0; y < nH; y += gridSize)
 			for (x = 0; x < nW; x += gridSize)
 			{
-				if (abs(M_ImgPreGray.at<uchar>(y, x) - M_ImgCurGray.at<uchar>(y, x)) > threshold)
+				for (i = 0; i < gridSize; i++)
 				{
-					arrPt.push_back(Point2f(x, y));
+					for (j = 0; j < gridSize; j++)
+					{
+						if (M_ImgPreHarrisNormScaled.at<uchar>(y + i, x + j) > threshold)
+						{
+							arrPt.push_back(Point2f(x + j, y + i));
+							bFlag = true;
+							break;
+						}
+					}
+
+					if (bFlag == true)
+					{
+						bFlag = false;
+						break;
+					}
 				}
+					
 			}
 
 		nRawPoint = arrPt.size();
@@ -2666,10 +2717,10 @@ void CMainProcessDlg::GethomographyHarris(vector<Point2f>& arrPtPre, Mat& homo, 
 		{
 			// 왼쪽 이미지 오프셋
 			if (bLR == LEFT)
-				nDebugOffset = (nH_Warp / 2);
+				nDebugOffset = (m_nH_Total / 2);
 			// 오른쪽 이미지 오프셋
 			if (bLR == RIGHT)
-				nDebugOffset = (nH_Warp / 2) + (nH / 2);
+				nDebugOffset = (m_nH_Total / 2) + (nH / 2);
 
 			BYTE** imgDebug;
 			CString strNum;
@@ -2806,6 +2857,7 @@ void CMainProcessDlg::GethomographyHarris(vector<Point2f>& arrPtPre, Mat& homo, 
 	// =====================================
 	
 	Point2f pt_homoPre;
+	double distance;
 
 	arrGodPt.clear();
 	arrGodPtTrack.clear();

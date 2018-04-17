@@ -1,5 +1,9 @@
 # Real-time Video stitching Using Camera Path Estimation and Homography Refinement
 > This is a framework that combines multiple frames acquired from moving cameras
+>
+> For reduce stitching time, we estimate homography using the optical-flow algorithm (Camera Path Estimation), then remove errors of homography using the block-matching (Homograpy Refinement).
+
+
 
 **Paper address** [link](http://www.mdpi.com/2073-8994/10/1/4) "Yoon, J., & Lee, D. (2017). Real-Time Video Stitching Using Camera Path Estimation and Homography Refinement. *Symmetry*, *10*(1), 4."
 
@@ -29,13 +33,13 @@
 
 ## 3. Camera Path Estimation
 
-### 3-1. Feature Extraction
+### 3-1. Feature Extraction (diffrence of intensity on grid)
 
 ![head](https://github.com/wjy5446/Real-time-video-stitching/blob/master/image/CPestimation1.png)
 
 
 
-### 3-2. Feature Tracking using optical flow
+### 3-2. Feature Tracking (optical flow)
 
 ![head](https://github.com/wjy5446/Real-time-video-stitching/blob/master/image/CPestimation2.png)
 
@@ -49,7 +53,7 @@
 
 ## 4. Homography Refinement
 
-### 4-1. Homography Refinement
+### 4-1. Homography Refinement (block-matching)
 
 ![head](https://github.com/wjy5446/Real-time-video-stitching/blob/master/image/HomographyRefinement.png)
 
@@ -80,9 +84,9 @@
 
 
 
-## Installation
+## Code
 
-OS X & Linux:
+> It is based on OpenCV 2.4.1.1,  MFC
 
 ```sh
 npm install my-crazy-module --save
@@ -93,31 +97,6 @@ Windows:
 ```sh
 edit autoexec.bat
 ```
-
-## Usage example
-
-A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
-
-_For more examples and usage, please refer to the [Wiki][wiki]._
-
-## Development setup
-
-Describe how to install all development dependencies and how to run an automated test-suite of some kind. Potentially do this for multiple platforms.
-
-```sh
-make install
-npm test
-```
-
-
-
-## Meta
-
-Your Name – [@YourTwitter](https://twitter.com/dbader_org) – YourEmail@example.com
-
-Distributed under the XYZ license. See ``LICENSE`` for more information.
-
-[https://github.com/yourname/github-link](https://github.com/dbader/)
 
 
 

@@ -1,11 +1,13 @@
 # Real-time Video stitching Using Camera Path Estimation and Homography Refinement
 > This is a framework that combines multiple frames acquired from moving cameras
 
-**Paper** [link](http://www.mdpi.com/2073-8994/10/1/4) **address**
+**Paper address** [link](http://www.mdpi.com/2073-8994/10/1/4) 
+
+**Video address** [link](https://sites.google.com/site/khuaris/home/video-stitching)
 
 
 
-![head]("\image\abstract.png")
+![head](\image\abstract.png)
 
 
 
@@ -17,7 +19,11 @@
 
 ## Method
 
-![head]("\image\method.png")
+![head](\image\method.png)
+
+
+
+
 
 
 
@@ -31,9 +37,20 @@
 
 ## Result
 
-- ​
-- ​
+- Sample Result
 
+![head](\image\result2.png)
+
+![head](\image\result.png)
+
+**Link** : [result video](https://sites.google.com/site/khuaris/home/video-stitching)
+
+
+
+- Time
+
+
+![head](\image\result3.png)
 
 
 ## Installation

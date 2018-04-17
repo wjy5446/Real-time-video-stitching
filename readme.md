@@ -1,7 +1,7 @@
 # Real-time Video stitching Using Camera Path Estimation and Homography Refinement
 > This is a framework that combines multiple frames acquired from moving cameras
 
-**Paper address** [link](http://www.mdpi.com/2073-8994/10/1/4) 
+**Paper address** [link](http://www.mdpi.com/2073-8994/10/1/4) "Yoon, J., & Lee, D. (2017). Real-Time Video Stitching Using Camera Path Estimation and Homography Refinement. *Symmetry*, *10*(1), 4."
 
 **Video address** [link](https://sites.google.com/site/khuaris/home/video-stitching)
 
@@ -11,13 +11,13 @@
 
 
 
-## Abstract
+## 1. Abstract
 
   We propose a novel real-time video stitching method using camera path estimation and homography refinement. The method can stably stitch multiple frames acquired from moving cameras in real time. In the proposed method, one initial between-camera (BC) homography and each camera path (CP) homography are used to estimate the BC homography at every frame. The BC homography is refined by using block matching to adjust the errors of estimated CPs (homography refinement). For fast processing, we extract features using the difference of intensities and use the optical flow to estimate camera motion (CM) homographies, which are multiplied with the previous CMs to calculate CPs (camera path estimations). In experiments, we demonstrated the performance of the CP estimation and homography refinement approach by comparing it with other methods. The experimental results show that the proposed method can stably stitch two image sequences at a rate exceeding 13 fps (frames per second).
 
 
 
-## Method
+## 2. Overall Method
 
 ![head](https://github.com/wjy5446/Real-time-video-stitching/blob/master/image/method.png)
 
@@ -27,21 +27,47 @@
 
 
 
-## Camera Path Estimation
+## 3. Camera Path Estimation
+
+### 3-1. Feature Extraction
+
+![head](https://github.com/wjy5446/Real-time-video-stitching/blob/master/image/CPestimation1.png)
 
 
 
-## Homography Refinement
+### 3-2. Feature Tracking using optical flow
+
+![head](https://github.com/wjy5446/Real-time-video-stitching/blob/master/image/CPestimation2.png)
 
 
 
-## Result
+### 3-3. Result
+
+![head](https://github.com/wjy5446/Real-time-video-stitching/blob/master/image/CPestimation_result.png)
+
+
+
+## 4. Homography Refinement
+
+### 4-1. Homography Refinement
+
+![head](https://github.com/wjy5446/Real-time-video-stitching/blob/master/image/HomographyRefinement.png)
+
+
+
+### 4-2. Result
+
+![head](https://github.com/wjy5446/Real-time-video-stitching/blob/master/image/HomographyRefinement_result.png)
+
+
+
+## 5. Result
 
 - Sample Result
 
-![head](\image\result2.png)
+![head](https://github.com/wjy5446/Real-time-video-stitching/blob/master/image/result2.png)
 
-![head](\image\result.png)
+![head](https://github.com/wjy5446/Real-time-video-stitching/blob/master/image/result.png)
 
 **Link** : [result video](https://sites.google.com/site/khuaris/home/video-stitching)
 
@@ -50,7 +76,8 @@
 - Time
 
 
-![head](\image\result3.png)
+![head](https://github.com/wjy5446/Real-time-video-stitching/blob/master/image/result3.png)
+
 
 
 ## Installation

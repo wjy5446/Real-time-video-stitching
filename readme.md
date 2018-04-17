@@ -7,7 +7,7 @@
 
 
 
-![head](\image\abstract.png)
+![alt text](https://github.com/wjy5446/Real-time-video-stitching/blob/master/image/abstract.png)
 
 
 
@@ -19,7 +19,7 @@
 
 ## Method
 
-![head](\image\method.png)
+![head](https://github.com/wjy5446/Real-time-video-stitching/blob/master/image/method.png)
 
 
 

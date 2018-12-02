@@ -88,16 +88,6 @@
 
 > It is based on OpenCV 2.4.1.1,  MFC
 
-```sh
-npm install my-crazy-module --save
-```
-
-Windows:
-
-```sh
-edit autoexec.bat
-```
-
 
 
 ## Thanks to
